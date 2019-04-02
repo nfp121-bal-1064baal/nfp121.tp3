@@ -60,6 +60,7 @@ public class Pile4 implements PileI, Cloneable {
     }
 
     public void empiler(Object o) throws PilePleineException {
+        if(o==null) return;
         if (estPleine())
             throw new PilePleineException();
         

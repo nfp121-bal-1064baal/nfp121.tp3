@@ -27,6 +27,7 @@ public class Pile implements PileI {
     }
 
     public void empiler(Object o) throws PilePleineException {
+        if(o==null) return;
         if (estPleine())
             throw new PilePleineException();
         this.zone[this.ptr] = o;

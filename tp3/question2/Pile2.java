@@ -33,7 +33,7 @@ public class Pile2 implements PileI {
     }
 
     public void empiler(Object o) throws PilePleineException {
-        
+        if(o==null) return;
         if (estPleine())
             throw new PilePleineException();
            this.stk.push(o);
