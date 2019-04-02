@@ -13,62 +13,111 @@ public class Pile implements PileI {
 
     private Object[] zone;
     private int ptr;
+    boolean estEgale;
 
     public Pile(int taille) {
-        // traiter le cas <=0
-        // a completer
+        if (taille <= 0)
+            taille = PileI.CAPACITE_PAR_DEFAUT;
+        this.zone = new Object[taille];
+        this.ptr = 0;
     }
 
     public Pile() {
-        this(0);
+        this(PileI.CAPACITE_PAR_DEFAUT);
     }
 
     public void empiler(Object o) throws PilePleineException {
-        // a completer
+        if (estPleine())
+            throw new PilePleineException();
+        this.zone[this.ptr] = o;
+        this.ptr++;
     }
 
     public Object depiler() throws PileVideException {
-        // a completer
-        return null;
+        
+        if (estVide())
+            throw new PileVideException();
+       
+        return zone[--ptr];
     }
 
     public Object sommet() throws PileVideException {
-        // a completer
-        return null;
+              if (estVide())
+                    throw new PileVideException();  
+             return this.zone[ptr-1];
     }
 
-    public int capacite() {
-        // a completer
-        return -1;
+    public int capacite() 
+    {
+        return this.zone.length;
     }
 
     public int taille() {
-        // a completer
-        return -1;
+        
+        return this.ptr;
     }
 
     public boolean estVide() {
-        // a completer
-        return false;
+        return this.ptr == 0;
     }
 
     public boolean estPleine() {
-        // a completer
-        return false;
+        return this.ptr == zone.length;
     }
 
     public boolean equals(Object o) {
-        // a completer
-        return false;
-    }
+        if(o== this) return true;
+        PileI  p=(PileI) this;
+        PileI p1=new Pile();
+        PileI p2=new Pile();
+        PileI pile=(PileI)o;
+        
+        try{
+            boolean c=true;
+            for(int i=0;i<taille();i++)
+            {
+                Object obj1=p.depiler();
+                Object obj2=pile.depiler();
+                
+                if(!obj1.equals(obj2)) c=false;
+                p1.empiler(obj1);
+                p2.empiler(obj2);
+            }  
+                
+                
+            for(int j=0;j<p1.taille();j++)
+            {
+                this.empiler(p1.depiler());
+                pile.empiler(p2.depiler());}
+                return c;
+            }catch(Exception e){}
+            return false;
+            }
+                
+             
+        
+        
+        
+        
+        
+    
+
 
     // fonction fournie
-    public int hashCode() {
+    public int hashCode() 
+    {
         return toString().hashCode();
     }
 
     public String toString() {
-        // a completer
-        return null;
+        StringBuffer sb = new StringBuffer("[");
+        for (int i = ptr - 1; i >= 0; i--) {
+            sb.append(zone[i].toString());
+            if (i > 0)
+                sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
+    
 }

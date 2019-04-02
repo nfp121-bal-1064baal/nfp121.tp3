@@ -8,6 +8,9 @@ public class UneUtilisation {
         // déclarer p1
         // déclarer p2
 
+                PileI<PolygoneRegulier> p1 = new Pile2<PolygoneRegulier>();
+        PileI<Object> p2 = new Pile2<Object>();
+
         // p1 est ici une pile de polygones réguliers PolygoneRegulier.java
         p1.empiler(new PolygoneRegulier(4, 100));
         p1.empiler(new PolygoneRegulier(5, 100));
